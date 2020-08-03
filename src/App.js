@@ -41,7 +41,7 @@ function App() {
           Color codes easier-making machine
         </Typography>
 
-        <Box className="nav--main" display="flex" justifyContent="flex-end" flexDirection="row">
+        <Box className="nav--main" display="flex" justifyContent="center" flexDirection="row">
           <LoginButton />
       </Box>
       </>
