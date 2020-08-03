@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.nav--main {
+  margin-top: 2rem;
+}
+
+.nav--loggedin {
+  text-align: right;
+}
+
+.user-avatar {
+  border: 2px solid #222;
+  border-radius: 50%;
+  height: 50px;
+  margin-right: 2ch;
+  width: 50px;
+}
