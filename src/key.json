@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "elseloop.com:api-project-823900046748",
+  "private_key_id": "7c998cd929f2573e1887d2b62161a316a664990d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0UgkUp2xABCBv\nui+ubJmgLsd4d14zDi89zLyLMCgClujXEhHxs+ACeqpoDkHEz449T92y3RZ1wyyo\nTLMTLf6WVhfFToClL0DrURM3+MNZ8BULz2pYJpcroAlQ59SQx0F44woCedWUDlVS\ncfWo9DLfrk530YnhsZaNCkrhk8nWJWgbnnYQMgAU9zokfF34C/abemkFhyLlMLd7\nwxLL2oyqMNJ4w2eXyjfTgOxVKLXiTr/sKsID/Q3lVd8Y4BOLxuIASUnTL3zfKGz1\n5JaTcvb3UusPuq8nBwxsak/idCqpOj5AZfVg1K0S5yg6cU13l97NnJuVrLDlO8fz\ngAvuDJ+fAgMBAAECggEACFv7OXQPfneSggt0FWvJwsAYatsXHgUiJy/Gwn8aLmXi\nPReEhxt1yYz35GNbei0TD4A/K1Zjfv8WzWXiMVlDAaN+bkesNWbXkBvN6RzaVYuI\ni5JzKstTMRMLYNmhJDsQgR2pWPcJRy1TmEMEhpoXglYZeNAudQI0vqzDpD8j2WOw\n8fSMBOpHNXmtVTLJtlYZeGcw2/zWG12V2gKiZWce10UG5TuEBvZU9b3GJTjJIBmZ\neSUrCe/uOkRzYN+5x4g605VoUiCPsMr6alvnzlLchnySn55osTzXv6zK2gZiV3kD\nnXy9s8VlRIHySPhps5KHkofgN+SgR0PumSiDCeDF9QKBgQDfMJ8HRwXq9hp+GH0v\nVigAEgF3e3is38upWDZ8TdA15fxMmdzAyQGQhlnyOXNjH4pptC0U2zSx+wG6I/dZ\nAp8IYj2LDId0fv57UKohO2vf349X09zwkEr3QqXPPAlbJ5OnGJP0PfJV4wmL8UtC\n2V58eaur43KBQcOARExzqLa5SwKBgQDO1BfprycLYYz4Iry4tlNfcTEL5eYetZVD\nM49cwZMPfZdckyhTUhbBnOLKgDzmC5PvwBbTszLSyppyuwp2X+xKCafugdMl0r67\nXeNcQb2SJCf6L2D0j1SuXOH2s5kqYVzauA9NedyX75kt/qF/ecoszYVFfmQ/Auf6\n28fSbzqyfQKBgQDNdQrQPjdaZpdYwN5stxk3h1vGS+l46sOm7sepglBLbZ3mPjWT\nWvaPvr4KV4y7EQvv5qchbfGCbhjW68kFLX6MzzLsT+pZ+ZX2mvkignr5qelg5m2b\nHpmEKNxOe2v5d+NajSuWSXhOTCQ7qTKpJUTvvWmlYEnGZ227JCRkzEj5JQKBgQCB\nOL4gAJDSaYZb2cgzV6bLcLsGBgM6mJTDQcmGWGL7QKp66m49cIJLQSvo/SoPSJiL\nKGaaqdFNJcxNdlLZFqFYuKO1PmOftAX6pnRQxbodPn3DsCpRYeO0dM+xBRDjC6Wp\n+WmGLGcIfmgj9n0MWhlY2Kc1ffw/6h7p+rrj3R69OQKBgDBn0kTcFKjjNFH6hRpO\n62EgjTgxnCT7A4FA0yKnCQ/wJZ2c+XpfVggyO7nfbevSK+TFIFXmuU6YFatnyGpq\nBrefLBqlpJw4MawL0kS8nwhnNIByWeaehWX54GjrMRSwlE9h3W6CDqM6oM7I/KUn\nuZ/rFMJVzLUARkU50dDlMevF\n-----END PRIVATE KEY-----\n",
+  "client_email": "na-colors@api-project-823900046748.elseloop.com.iam.gserviceaccount.com",
+  "client_id": "118183849509044030367",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/na-colors%40api-project-823900046748.elseloop.com.iam.gserviceaccount.com"
+}
