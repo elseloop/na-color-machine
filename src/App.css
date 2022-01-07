@@ -1,40 +1,6 @@
 .App {
+  height: 100%;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .nav--main {
@@ -51,4 +17,40 @@
   height: 50px;
   margin-right: 2ch;
   width: 50px;
+}
+
+.table--matched,
+.table--missed {
+  margin: 2rem auto;
+  width: 100%;
+}
+
+.table--matched {
+  margin-bottom: 4rem;
+}
+
+.table--matched .MuiTableHead-root th,
+.table--missed .MuiTableHead-root th {
+  background-color: #222;
+  color: #fff;
+  cursor: pointer;
+  position: sticky;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.table--matched .MuiTableHead-root th:hover,
+.table--missed .MuiTableHead-root th:hover {
+  background-color: #f50057;
+}
+
+.table--missed {
+  padding-bottom: 10rem;
+}
+
+.MuiTableHead-root .MuiSvgIcon-root {
+  fill: white;
+}
+
+.MuiTableHead-root .PrivateSwitchBase-checked-16 .MuiSvgIcon-root {
+  fill: #f50057;
 }
