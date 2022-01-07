@@ -10,7 +10,7 @@ const LogoutButton = () => {
             onClick={() => logout()}
             id="naColorLogoutButton"
             color="secondary"
-            variant="contained"
+            variant="outlined"
             size="large"
             className="btn--logout"
         >
