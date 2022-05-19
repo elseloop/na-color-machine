@@ -1,92 +1,52 @@
-import React, { useEffect } from 'react';
+import './App.css';
+
 import {
-  Container,
   Box,
-  CircularProgress
+  CircularProgress,
+  Container
 } from '@material-ui/core';
+import React, { useEffect } from 'react';
+
+import AuthenticatedNav from './components/auth-nav';
+import ColorEntryForm from './components/color-entry-form';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
-import { useAuth0 } from '@auth0/auth0-react';
-import LoginButton from './components/login-button';
-import LogoutButton from './components/logout-button';
-import ColorEntryForm from './components/color-entry-form';
-import { useAirtableData } from './data/airtable-base';
-
-import './App.css';
+import UnauthenticatedNav from './components/unauth-nav';
 import logo from './logo.png';
+import { useAirtableData } from './data/airtable-base';
+import { useAuth0 } from '@auth0/auth0-react';
 
+// composes authenticated & unauthenticated versions of the App
+// based on whether the user is logged in or not
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
-
-  const AuthenticatedNav = () => {
-    const { user } = useAuth0();
-
-    return (
-      <Box style={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          margin: '2rem 0 5rem'
-        }}>
-          <Box style={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'flex-start',
-          flexDirection: 'row',
-        }}>
-            <img style={{ width: '125px', margin: '0 2ch 0 0' }} className="brand" src={logo} alt="Next Adventure logo" />
-          <Typography variant="overline" component="h1" style={{margin: '0', fontSize: '1.5rem' }}>
-            Color code generator
-          </Typography>
-        </Box>
-
-        <Box style={{
-          alignItems: 'center',
-          display: 'flex',
-          justifyContent: 'flex-end',
-          flexDirection: 'row',
-        }}>
-          <img className="user-avatar" src={user.picture} alt={user.name} />
-          <LogoutButton />
-        </Box>
-      </Box>
-    );
-  }
-
-  const UnauthenticatedNav = () => {
-    return (
-      <>
-        <img style={{ width: '250px', margin: '5rem auto 0' }} className="brand" src={logo} alt="Next Adventure logo" />
-
-        <Typography variant="overline" component="h1" style={{margin: '1rem auto 0', fontSize: '2.5rem' }}>
-          Color code generator
-        </Typography>
-
-        <Box className="nav--main" display="flex" justifyContent="center" flexDirection="row">
-          <LoginButton />
-      </Box>
-      </>
-    );
-  }
 
   const AuthenticatedApp = () => {
     const { user } = useAuth0();
     const { airtableData, getData } = useAirtableData();
 
+    // fetch data from Airtable when the auth component mounts
     useEffect(() => {
-        async function onPageLoad () {
-            await getData();
-        }
+      async function onPageLoad () {
+        await getData();
+      }
 
       onPageLoad();
-    }, [getData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
       <>
-        <AuthenticatedNav />
+        <AuthenticatedNav user={user} logo={logo} />
 
-        {airtableData && <ColorEntryForm data={airtableData} user={user} />}
+        {airtableData
+        ?
+          <ColorEntryForm data={airtableData} user={user} />
+        :
+          <Box style={{ height: "300px", width: "100%" }} display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+            <CircularProgress />
+          </Box>
+        }
       </>
     );
   };
@@ -105,7 +65,11 @@ function App() {
       <Container maxWidth="lg">
         <Typography component="div">
           <Box style={{ height: "100%" }} display="flex" justifyContent="flex-start" flexDirection="column" color="text.primary">
-            {isAuthenticated ? <AuthenticatedApp /> : <UnauthenticatedNav />}
+            {
+              isAuthenticated
+              ? <AuthenticatedApp />
+              : <UnauthenticatedNav logo={logo} />
+            }
           </Box>
         </Typography>
       </Container>

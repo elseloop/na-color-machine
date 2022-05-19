@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Box,
   Button,
@@ -8,12 +7,18 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableRow,
   TableHead,
+  TableRow,
   Typography
 } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
+
+import React from 'react';
 import { airtableBase } from '../data/airtable-base';
+import { useSnackbar } from 'notistack';
+
+const {
+  REACT_APP_AIRTABLE_TABLE_ID
+} = process.env;
 
 function chunkArray(bigarray, size = 10) {
   let arrayOfArrays = [];
@@ -27,6 +32,7 @@ function chunkArray(bigarray, size = 10) {
 
 const MissedTable = React.memo((props) => {
   const {
+    data,
     missed,
     ids,
     numSelected,
@@ -49,6 +55,7 @@ const MissedTable = React.memo((props) => {
 
     const selectedData = selected.map((item) => {
       const now = new Date();
+
       return {
         fields: {
           "8CHAR": item.eightId,
@@ -64,8 +71,10 @@ const MissedTable = React.memo((props) => {
 
     const chunks = chunkArray(selectedData);
 
+    // Airtable API only allows 10 records per create batch.
+    // So we need to chunk the array into 10 record batches.
     chunks.map((chunk) => {
-      return airtableBase('Table 1').create(
+      return airtableBase(REACT_APP_AIRTABLE_TABLE_ID).create(
         chunk,
         (err, records) => {
           if (err) {
@@ -74,10 +83,15 @@ const MissedTable = React.memo((props) => {
               autoHideDuration: 7500,
               variant: 'error',
             });
+
             return;
           }
 
-          if (records.length > 0) {
+          if (records && records?.length > 0) {
+            // add new records to local cache of database items
+            // to save another roundrip to Airtable
+            data.push(...records);
+
             enqueueSnackbar(msg, {
               variant: 'success',
               preventDuplicate: true
@@ -85,6 +99,8 @@ const MissedTable = React.memo((props) => {
           }
         });
     });
+
+
   };
 
   async function copy(content) {

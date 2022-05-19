@@ -1,14 +1,16 @@
-import React, { useState, useRef } from 'react';
 import {
   Box,
   Button,
   TextareaAutosize,
   Typography
 } from '@material-ui/core';
+import React, { useRef, useState } from 'react';
+
 import MatchedTable from './matched-table';
 import MissedTable from './missed-table';
+import isEmpty from 'lodash.isempty';
 
-const ColorEntryForm = ({ data, user}) => {
+const ColorEntryForm = React.memo(({ data, user}) => {
   const [textInput, setTextInput] = useState('');
   const [matched, setMatched] = useState([]);
   const [misses, setMisses] = useState([]);
@@ -58,7 +60,7 @@ const ColorEntryForm = ({ data, user}) => {
     // using only lowercase,
     // as they're easier to read
     // removed numbers that look like letters
-    // removed `cfhistu` to avoid possible swears, etc, just in case
+    // removed `cfhistu` to avoid possible swears, slurs, etc
     const alphabet = '23456789abdegjkmnpqrvwxyz';
     let rando = '';
 
@@ -73,7 +75,7 @@ const ColorEntryForm = ({ data, user}) => {
   // @param existingIds, array, set of existing IDs
   // @param numAttempts, int, how many tries for unique before we bail
   // @param size, int, length of resulting ID
-  const generateUnique = function(existingIds, numAttempts = 9999, size) {
+  const generateUnique = function(existingIds, numAttempts = 99999999, size) {
     existingIds = existingIds || [];
     let retries = 0;
     let id;
@@ -102,16 +104,20 @@ const ColorEntryForm = ({ data, user}) => {
 
     const findDataMatch = () => {
       return cleanValuesArray.map((value) => {
-        return data.find( ({fields}) => {
+        return data.find(({fields}) => {
+          if (isEmpty(fields)) return false;
+
+          // fields.Original is the saved value originally entered by the user
           return clean(fields.Original) === clean(value);
         });
-      }).filter( Boolean );
+      }).filter( Boolean ); // strips out falsy values
     };
 
     const findMisses = () => {
       const found = findDataMatch();
       const foundVals = found.map((f) => f.fields.Original);
 
+      // filter matches from original values then clean them
       const notFound = cleanValuesArray.filter((value) => {
         return !foundVals.includes(clean(value));
       }).map((v) => clean(v));
@@ -122,22 +128,20 @@ const ColorEntryForm = ({ data, user}) => {
     const matchesArray = findDataMatch();
     const missesArray = findMisses();
 
+    // set our state
     setMatched(matchesArray);
     setMisses(missesArray);
 
-    const makeIds = () => {
-      const missedArr = findMisses();
+    // generate IDs for the new codes
+    const makeIds = () => misses.map((item) => {
+      const eightCharId = generateUnique(eightChars, 99999999, 8);
+      const thirtyCharId = item.slice(0, 30);
 
-      return missedArr.map((item) => {
-        const eightCharId = generateUnique(eightChars, 9999, 8);
-        const thirtyCharId = item.slice(0, 30);
-
-        return {
-          eightCharId,
-          thirtyCharId
-        }
-      });
-    }
+      return {
+        eightCharId,
+        thirtyCharId
+      }
+    });
 
     setNewIds(makeIds);
   };
@@ -173,7 +177,8 @@ const ColorEntryForm = ({ data, user}) => {
     setFormHidden(!formHidden);
   };
 
-  const handleClick = (event, data = {}) => {
+  // add any selected codes/rows to array to be added to db
+  const handleTableCellClick = (event, data = {}) => {
     const selectedIndex = findSelected(data.original)
     let newSelected = [];
 
@@ -195,6 +200,7 @@ const ColorEntryForm = ({ data, user}) => {
 
   const isSelected = (name) => findSelected(name) !== -1;
 
+  // reset all the things!
   const resetPage = () => {
     setTextInput('');
     setMatched([]);
@@ -285,13 +291,14 @@ const ColorEntryForm = ({ data, user}) => {
         {
           misses.length > 0
           ? <MissedTable
+            data={data}
             missed={misses}
             ids={newIds}
             numSelected={selected.length}
             onSelectAllClick={handleSelectAllClick}
             rowCount={misses.length}
             isSelected={isSelected}
-            handleClick={handleClick}
+            handleClick={handleTableCellClick}
             selected={selected}
             user={user}
             resetPage={resetPage}
@@ -301,6 +308,6 @@ const ColorEntryForm = ({ data, user}) => {
       </Box>
     </>
   );
-};
+});
 
 export default ColorEntryForm;
