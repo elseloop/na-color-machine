@@ -233,7 +233,7 @@ const MissedTable = React.memo((props) => {
         onClick={resetPage}
         style={{ maxWidth: 'calc(50% - 2rem)', margin: '2rem auto 0 1rem' }}
       >
-        <span style={{ fontSize: '1.25rem' }} role="img" aria-label="skull emoji"> 💀 </span>
+        <span style={{ fontSize: '1.25rem' }} role="img" aria-label="broom emoji"> 🧹 </span>
         &nbsp;
         Reset Page
       </Button>

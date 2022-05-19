@@ -14,7 +14,13 @@ const UnauthenticatedNav = ({logo}) => {
 
       <Box className="nav--main" display="flex" justifyContent="center" flexDirection="row">
         <LoginButton />
-    </Box>
+      </Box>
+
+      <Box className="nav--main" display="flex" justifyContent="center" flexDirection="row">
+        <Typography variant="body1" gutterBottom style={{textAlign: 'left', margin: '1rem 0 0', display: 'block'}}>
+          A valid Next Adventure email address is required for access.
+        </Typography>
+      </Box>
     </>
   );
 }

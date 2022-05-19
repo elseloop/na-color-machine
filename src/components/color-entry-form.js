@@ -133,15 +133,19 @@ const ColorEntryForm = React.memo(({ data, user}) => {
     setMisses(missesArray);
 
     // generate IDs for the new codes
-    const makeIds = () => misses.map((item) => {
-      const eightCharId = generateUnique(eightChars, 99999999, 8);
-      const thirtyCharId = item.slice(0, 30);
+    const makeIds = () => {
+      const missedArr = findMisses();
 
-      return {
-        eightCharId,
-        thirtyCharId
-      }
-    });
+      return missedArr.map((item) => {
+        const eightCharId = generateUnique(eightChars, 99999999, 8);
+        const thirtyCharId = item.slice(0, 30);
+
+        return {
+          eightCharId,
+          thirtyCharId
+        }
+      });
+    };
 
     setNewIds(makeIds);
   };
@@ -272,7 +276,7 @@ const ColorEntryForm = React.memo(({ data, user}) => {
                 disabled={textInput.length < 1 || textInput === ''}
                 onClick={resetPage}
               >
-                <span style={{ fontSize: '1.25rem' }} role="img" aria-label="skull emoji"> 💀 </span>
+                <span style={{ fontSize: '1.25rem' }} role="img" aria-label="broom emoji"> 🧹 </span>
                 &nbsp;
                 Reset Page
               </Button>
